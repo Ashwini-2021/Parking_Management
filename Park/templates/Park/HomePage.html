@@ -1,0 +1,461 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Parking Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+    <div class="navbar">
+        <img src="{% static 'logo1.png' %}" class="logo">
+        <nav>
+          <ul>
+            <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+            <li class="data1"><a href="{% url 'homepage' %}">Home</a></li>
+            <li class="data2"><a href="{% url 'hpcontactus' %}">Contact Us</a></li>
+         
+        <li>
+          <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">Sign In/Sign Up </button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="{% url 'lologin' %}">Land Owner</a>
+                <a href="{% url 'vologin' %}">Vehicle Owner</a>
+                <a href="{% url 'adminlogin' %}">Admin</a>
+              </div> 
+          </div> 
+        </li> 
+      </ul>
+    </nav>
+    </div>
+  </header>
+   <main>
+    <div class="column">
+        <div class="tab1">
+          <img src="{% static 'img10.jpg' %}" alt="vehicle image">
+        </div>
+        <div class=" tab tab2">
+            <h2 class="gradient-text">About Us </h2>
+         <p>What first comes to your mind when you think about parking? 
+        Just a couple of decades ago, parking was about free space and maybe 
+        some inconvenience. Nowadays, the population is growing along with the
+        number of vehicles, which puts individual businesses, the overall city 
+        infrastructure, and the environmental situation in the firing line. 
+        
+        Fortunately, modern technologies offer smart parking innovations that will help 44% of 
+        drivers reduce their stress and potentially save millions of barrels of oil.
+        Smart parking is a technological approach to improve the parking process 
+        and the car's positioning in a city with a shortage of space.</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="tab3">
+          <h2 class="gradient-text">Benefits of choosing us?</h2>
+            <div class="list1">
+              <li>Faster parking</li>
+              <li>Space optimization in tight areas.</li>
+              <li>Reduced emissions</li>
+              <li>Save Time</li>
+              <li>Flexible parking fees</li>
+            </div>            
+      </div>
+        
+        <div class="tab4">
+          <img src="{% static 'img3.png' %}" alt="vehicle image">
+        </div>
+    </div>
+
+    <div class="column">        
+        <div class="tab5">
+          <img src="{% static 'img11.jpg' %}" alt="vehicle image">
+        </div>
+    
+        <div class="tab6">
+          <h2 class="gradient-text">Our Benefits</h2>
+          <div class="list">
+            <li><a href="#" class="fa fa-smile-o"></a>Clients</li>
+            <li><a href="#" class="fa fa-line-chart"></a>Newly Growing Businesses</li>
+            <li><a href="#" class="fa fa-phone"></a>24X7/365 Support</li>
+            <li><a href="#" class="fa fa-map-o"></a>Updates</li>
+            <li><a href="#" class="fa fa-truck"></a> Parking Per Year</li>
+          </div>            
+        </div>
+      </div> 
+   </main>
+
+  <footer>
+    <div class="column1">
+      <div class="tab71">
+        <img src="{% static 'logo1.png' %}" class="logo"><h2>Park_Mentor</h2>
+
+      </div>
+      <div class="tab72"><h2>GET KNOW ABOUT US</h2>
+          <a href="{% url 'homepage' %}"><li>About Us</li></a>
+          <a href="{% url 'hpcontactus' %}"><li>Help</li></a>
+      </div>
+      <div class="tab73">
+        <h2>FIND US HERE</h2>
+         <li>Pune Station</li>
+         <li>Sangamwadi</li>
+         <li>FC Road</li>
+         <li>JM Road</li>
+         <li>Yerawada</li>
+         <li>Wagholi</li>
+      </div>
+      <div class="tab74">
+        <h2>WE'RE SOCIAL</h2>
+        <li><a href="#" class="fa fa-facebook"></a>Facebook</li><br>
+        <li><a href="#" class="fa fa-twitter"></a>Twitter</li><br>
+        <li><a href="#" class="fa fa-instagram"></a>Instagram</li><br>
+      </div>
+  </div> 
+  </footer>
+</body>
+
+<!--JavaScript Code-->
+<script>
+  /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</script>
+
+
+<!--CSS Code-->
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    height: 150px;
+    margin-top: 2px; ;
+    margin-bottom: 5px;
+    background: #9BC966;
+  }
+  .navbar img{
+    margin-top: 35px;
+    padding-left: 5px;
+    height: 100;
+    width: 100;
+  }
+  .data1{
+    margin-left: 500px;
+    font-size: 20px;
+  }
+  .data2{
+    font-size: 20px;
+  }
+.name{
+    font-size: 60px;
+    font-weight: 100;
+    margin-top: 50px; 
+    color: brown;
+}  
+body{
+  background-image: url("img4.jpg");
+  height: auto;
+  width: 100%;
+  
+}
+.column{
+  display: grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows: minmax(150px auto);
+  grid-gap: 20px;
+  background: white;
+}
+.tab1{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:1;
+  grid-column-end:2;
+}
+.tab1 img{
+  height: 500px;
+  width: 700px;
+}
+.tab2{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:2;
+  grid-column-end:3;
+}
+.tab2 h2{
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+}
+.tab2 p{
+  font-size: 25px;
+  margin-top: 20px;
+}
+.tab3{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:1;
+  grid-column-end:2;
+}
+.tab3 h2{
+  font-size: 50px;
+  text-align: center;
+}
+.tab3 .list1{
+  font-size: 25px;
+  margin-top: 20px;
+  padding-left: 70px;
+}
+.tab3 .list1 li{
+  margin-top: 10px;
+  padding-left: 50px;
+}
+.tab4{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:2;
+  grid-column-end:3;
+}
+.tab5{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:1;
+  grid-column-end:2;
+}
+.tab5 img{
+  padding-left: 50px;
+  height: 500px;
+  width: 700px;
+}
+.tab6{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:2;
+  grid-column-end:3;
+}
+.tab6 h2{
+  font-size: 50px;
+  text-align: center;
+}
+.tab6 .list{
+  font-size: 25px;
+  margin-top: 20px;
+  padding-left: 70px;
+}
+.tab6 .list a{
+  padding-right: 20px;
+}
+.tab6 .list li{
+  padding-left: 50px;
+  margin-top: 10px;
+}
+.tab6 a{
+  text-decoration: none;
+  color: black;
+  padding-right: 20px;
+  font-size: 14px;
+} 
+.column1{
+  display: grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(200px auto);
+  grid-gap: 20px;
+  background: url("img12.png");
+  background-repeat: no-repeat;
+  background-size: 1500px 400px;
+}
+.tab71{
+  grid-row-start:1;
+  grid-row-end:20;
+  grid-column-start:1;
+  grid-column-end:2;
+}
+.tab71 h2{
+  font-size: 50px;
+  text-align: center;
+  color: brown;
+}
+.tab72{
+  grid-row-start:1;
+  grid-row-end:20;
+  grid-column-start:2;
+  grid-column-end:3;
+  text-align:left;
+}
+.tab72 h2{
+  padding-top: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+.tab72 li{
+  margin-top: 10px;
+  padding-left: 50px;
+  font-size: 20px;
+}
+.tab73{
+  grid-row-start:1;
+  grid-row-end:20;
+  grid-column-start:3;
+  grid-column-end:4;
+  text-align:left;
+}
+.tab73 h2{
+  padding-top: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+.tab73 li{
+  margin-top: 10px;
+  padding-left: 50px;
+  font-size: 20px;
+}
+.tab74{
+  grid-row-start:1;
+  grid-row-end:20;
+  grid-column-start:4;
+  grid-column-end:5;
+}
+.tab74 h2{
+  padding-top: 20px;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.tab74 a{
+  text-decoration: none;
+  color: black;
+  padding-right: 20px;
+  font-size: 14px;
+} 
+.tab74 li{
+  padding-left: 50px;
+  margin-top: 5px;
+  font-size: 20px;
+  text-align:left;
+}
+ /* Dropdown Button */
+.dropbtn {
+    background:transparent;
+    color: black;
+    padding: 16px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background: transparent;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+ 
+.gradient-text1{
+    background-image: linear-gradient(60deg, blue, purple);
+        -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.navbar{
+    width: 100%;
+    height: 15vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    height:150px;
+    width: 120px;
+    cursor:pointer;
+}
+
+nav{
+    flex:1 ;
+    padding-left:20px ;
+}
+nav ul li{
+    display: inline;
+    list-style: none;
+    margin: 0px 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+.gradient-text{
+    background-image: linear-gradient(45deg,#662D8C , #ED1E79 );
+    -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+}
+
+
+footer {
+    display: block;
+    text-align: center;
+    padding: 3px;
+    background: #9BC966;
+    color: black;
+    margin-top: 5px; ;
+    margin-bottom: 2px;
+    left:10px;
+    bottom: 180px;
+  } 
+.social-links{
+  font-size: 20px;
+}
+footer a{
+    text-decoration: none;
+    color: black;
+    padding-right: 20px;
+    font-size: 14px;
+    margin: 0px 20px;
+}  
+  
+</style>

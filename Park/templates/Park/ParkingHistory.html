@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="blanchedalmond">
+    <div>
+    <header>
+        <center> <h1>Parking History</h1> </center>
+      
+    </header><br><br>
+</div>
+    <div class="font">
+     <table align="center">
+        <thead>
+            <tr>
+                <th>VId</th>
+                <th>Parking Time</th>
+                <th>Un-Park Time</th>
+                <th> Address </th>
+                <th> Vehicle Type </th>
+                <th> Vehicle Number </th>
+                <th>Charges</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in tup  %}
+            <tr>
+                <td>{{ x.0 }}</td>
+                <td>{{ x.1 }}</td>
+                <td>{{ x.2 }}</td>
+                <td>{{ x.3 }}</td>
+                <td>{{ x.4 }}</td>
+                <td>{{ x.5 }}</td>
+                <td>{{ x.6 }}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        
+     </table>
+    </div>
+</body>
+</html>
+<style>
+  table,th,td{
+    
+    font-size: large;
+    min-width: 200px;
+  }
+  th{
+    font-weight: bold;
+  }
+  th ,td{
+    background-color: #faa700;
+    text-align: center;
+    height: 60px;
+    width:170px;
+    /* padding: 24px 18px; */
+  }
+  tbody tr{
+    border-bottom: 1px solid  #a09d97;
+  }
+  tbody tr:nth-of-type(even){
+   background-color: #cdc5b7;
+  }
+
+</style>

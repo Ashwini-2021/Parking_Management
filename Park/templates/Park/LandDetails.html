@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Parking Details</title>
+    </head>
+    <body>
+        <div class="center">
+            <h1>Parking Place</h1>
+            <form method=POST enctype="multipart/form-data">
+              {% csrf_token %} 
+              <div class="inputbox">
+                <input type="text" name="add" required="required">
+                <span>Place Address</span>
+              </div>
+              <div class="inputbox">
+                <input type="text" name="area" required="required">
+                <span>Area in square ft</span>
+              </div>
+              
+              <div class="inputbox">              
+                <input type="file" name="img" accept="image/*" required="required">
+              </div>
+              <div class="inputbox">
+                <input type="submit" name="submit" value="add_Place">
+              </div>
+            </form>
+          </div>
+    </body>
+</html>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color:#9BC966;
+  font-family: "Sansita Swashed", cursive;
+}
+.center {
+  width: 50%;  
+  position: relative;
+  padding: 50px 50px;
+  background: #fff;
+  border-radius: 10px;
+}
+.center h1 {
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding-left: 30vh;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  align-self:center ;
+}
+.center .inputbox {
+  margin-left: 18vh;
+  position: relative;
+  width: 500px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+.center .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.center .inputbox input:focus ~ span,
+.center .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.center .inputbox [type="submit"] {
+  width: 50%;
+  background: #9BC966;
+  color: #fff;
+  border: #fff;
+}
+.center .inputbox:hover [type="submit"] {
+  background-color: green;
+}
+</style>

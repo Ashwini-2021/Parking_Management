@@ -1,0 +1,179 @@
+<html>
+    <head>
+        <title>Vehicle Details</title>
+    </head>
+    <body>
+        <div class="center">
+            <h1>Vehicle Details</h1>
+            <form action="#" class="login" method=POST onsubmit="return validateData()">
+              {% csrf_token %}
+              <div class="inputbox">
+                <select name = "dropdown" class="dd">
+                  <option value = "select" selected>Select vehicle type</option>
+                  <option value = "bike">Bike</option>
+                  <option value = "sedan">Sedan</option>
+                  <option value = "van">Van</option>
+                  <option value = "suv">SUV</option>
+                  <option value = "truck">Truck</option>
+                  <option value = "hatchback">Hatchback</option>
+                </select>
+              </div> 
+              <div class="inputbox">
+                <small class="mandatory" id="vnum_error"></small>
+                <input type="text" name="Vnum" id='vnum'
+                 oninput="isValidData('vnum','vnum_error')"
+                 onfocusout="isEmptyField('vnum','vnum_error')">
+                <span>Vehicle Number</span>
+              </div>
+              <div class="inputbox">                        
+                <input type="submit" name="submit" value="add_vehicle">
+              </div>
+            </form>
+          </div>
+    </body>
+</html>
+
+<style>
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color:#9BC966;
+  font-family: "Sansita Swashed", cursive;
+}
+.center {
+  width: 50%;  
+  position: relative;
+  padding: 50px 50px;
+  background: #fff;
+  border-radius: 10px;
+}
+.center h1 {
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding-left: 30vh;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  align-self:center ;
+}
+.center .inputbox {
+  margin-left: 18vh;
+  position: relative;
+  width: 500px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+.dd{
+  width: 500px;
+  height: 50px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.center .inputbox input:focus ~ span,
+.center .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.center .inputbox [type="submit"] {
+  width: 50%;
+  background: #9BC966;
+  color: #fff;
+  border: #fff;
+}
+.center .inputbox:hover [type="submit"] {
+  background-image: green;
+}
+</style>
+<script>
+
+  function setError(id, error, id2) {
+      document.getElementById(id).innerHTML = error;
+      document.getElementById(id).style.color = "red";
+      document.getElementById(id2).style.borderColor = "red";
+  }
+  
+  function setCorrect(id1, id2) {
+      document.getElementById(id1).innerHTML = "";
+      document.getElementById(id2).style.borderColor = "blue";
+  }
+  
+  // Validation for username
+  function isValidData(inputID, errorID) {
+    let flag = isEmptyField(inputID, errorID);
+    if (flag == false) {
+        return false;
+    }
+    var regName =  /^[A-Z]{2}\s[0-9]{2}\s[A-Z]{2}\s[0-9]{4}$/;
+    let lname = document.getElementById(inputID).value
+    if (!regName.test(lname)) 
+    {
+      console.log("Invalid Data of", inputID);
+      setError(errorID, "Please enter the valid data", inputID);
+      return false;
+    }
+    else 
+    {
+      console.log("Correct lname");
+      setCorrect(errorID, inputID);
+      return true;
+    }
+  }
+
+  function isEmptyField(inputID, errorID) {
+    let data = document.getElementById(inputID).value
+  
+    if (data.length == 0) {
+        console.log("Invalid Data of", inputID);
+        setError(errorID, "Please Fill The Field", inputID);
+        return false;
+    }
+  
+    else {
+        console.log("Correct data");
+        setCorrect(errorID, inputID);
+        return true;
+    }
+  }
+
+   // This function get call at the time of form submission & check whether data is correctly fill
+   function validateData() {
+  
+    let flag1 = isValidData('vnum', 'vnum_error');
+    
+    if (flag1)
+    {
+      return true;
+    }
+    else {
+        return false;
+    }
+  }  
+  </script>  

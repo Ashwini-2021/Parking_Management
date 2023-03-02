@@ -1,0 +1,428 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>VehicleOwnerDesktop</title>
+      <link rel="stylesheet" href="VehicleOwnerDesktop.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type = "text/javascript" src="Front_Page3.js"></script> 
+   </head>
+
+   <body>   
+    <header>
+      <div class="navbar">
+          <img src="{% static 'logo1.png' %}" class="logo">
+          <nav>
+            <ul>
+              <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+               <li>
+                <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">
+                  <i href="#" class="fa fa-user-circle fa-3x"></i>
+                  <a class="l1">{{ request.session.res.VOusername }}</a>
+                
+                  <div id="myDropdown" class="dropdown-content">
+                  <a href="{% url 'parkinghistory' %}">Parking History</a>
+                  <a href="{% url 'vopayment' %}">Payment Method</a>
+                  <a href="{% url 'voprofile' %}">Profile</a>
+                  <a href="{% url 'vohelp' %}">Help</a>
+                  <a href="{% url 'vologout'%}">
+                    <i href="#" class="fa fa-sign-out"></i>SignOut
+                  </a>
+                </div> 
+              </button>
+                </div> 
+             </li> 
+            </ul>
+          </nav>
+      </div>
+    </header>
+
+       <div>   
+        
+        <div class="container1">
+          <div class="grid c1">
+            <h2>"need a parking...?need a Park Mentor..."</h2>
+          </div>
+          <div class="grid c2">
+            <h5>Mobility Begins Here...!</h5>
+        </div>
+        <div class="grid c3">
+          <form>
+            <select name = "dropdown">
+              <option value = "select" selected>{{ t.0 }}</option>
+            </select>
+            <i href="#" class="fa fa-search"></i>
+            <input type="text" placeholder="{{ t.1 }}" name="place">
+            <button type="submit" name="submit">Find</button><br/>
+          </form>
+        </div>
+        <div class="grid c4">
+          <span id="time"></span>
+        </div>
+        </div>
+              
+<!--==============================parking place lis=========================================-->
+
+<div class="container3">
+  <h2> Available Parking Places</h2>
+</div>
+<div class="container2">
+    <table>
+      <tr>
+        <th>Address</th>
+        <th>Land Owner</th>
+        <th>Parking Status</th>
+      </tr> 
+      {% for x in ans%}
+      <tr>
+        <td>{{ x.0 }}</td>
+        <td>{{ x.1 }}</td>
+        {% if x.2 == 0 %}
+        <td class="ps">Active <a href="{% url 'bookparking' key=x.0 key1=x.3 %}"><button type="button" class="btn1">Book_Parking</button></a></td>
+        {% endif %}
+        {% if x.2 == 1 %}
+        <td class="ps1">Inactive</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+<div class="container3">
+  <h2>Current Parking Status:<a href="{% url 'currentps' %}"><button>Click Me!</button></a></h2>
+</div>
+
+<footer>
+  <div class="social-links">
+    <a href="#" class="fa fa-facebook"> Facebook</a>
+    <a href="#" class="fa fa-twitter"> Twitter</a>
+    <a href="#" class="fa fa-instagram"> Instagram</a>
+  </div>
+</footer>
+
+<!--=======================================================================-->        
+    <!-- Displaying date and time below search bar-->
+      <script>
+        var datetime = new Date();
+        console.log(datetime);
+        document.getElementById("time").textContent = datetime;
+      </script>
+   </body>
+</html>
+
+<!--javascript code-->
+<Script>
+  /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</Script>
+
+
+
+<!--CSS Code-->
+<style>
+  .ps{
+    color:blue;
+  }
+  .ps1{
+    color:red;
+  }
+  table {
+    width: 75%;
+    text-align: left;
+    border: 1px solid black;
+    margin-left:50px;
+    margin-right:50px;
+  }
+  th {
+  padding: 1rem;
+  border: 1px solid black;
+  }
+  td {
+  padding: 1rem;
+  border: 1px solid black;
+  }
+  .btn1{
+    margin-left:20%;
+    background-color:#9BC966;
+    border:none;
+    padding: 15px 32px;
+    color:black;
+    }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  .title{
+    font-size: 60px;
+      font-weight: 100;
+      margin-top: 24px; ;
+      margin-bottom: 15px;
+      text-align: center;
+      color: white;
+  } 
+  
+  .l1 {
+    color:black;
+  }
+  .fa{
+    color:black;
+  }
+
+.container{
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg,#87adfe,#ff77);
+    background-position: center;
+    background-size: 100% 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x:hidden; 
+    overflow-y:auto; 
+}
+  header {
+    height: 150px;
+    margin-top: 2px; ;
+    margin-bottom: 5px;
+    background: #9BC966; 
+  }
+  .navbar img{
+    margin-top: 40px;
+    padding-left: 5px;
+    height: 150px;
+    width: 130px;
+  }
+  .name{
+    margin-left: -20px;
+    font-size: 60px;
+    font-weight: 100;
+    margin-top: 50px; 
+    text-align: center;
+    color:white;
+  }  
+  body{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  }
+  
+  /* Dropdown Button */
+  .dropbtn {
+    background:transparent;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background: transparent;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    margin-left: 650px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+  .navbar{
+    width: 100%;
+    height: 15vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo{
+    width: 160px;
+    cursor:pointer;
+  }
+  
+  nav{
+    flex:1 ;
+    padding-left:60px ;
+  }
+  nav ul li{
+    display: inline;
+    list-style: none;
+    margin: 0px 20px;
+  }
+  nav ul li a{
+    text-decoration: none;
+    color: black;
+  }
+  
+  footer {
+    display: block;
+    text-align: center;
+    padding: 3px;
+    background: #9BC966;
+    color: white;
+    margin-top: 5px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  } 
+  .social-links{
+  font-size: 20px;
+  }
+  footer a{
+    text-decoration: none;
+    color: white;
+    padding-right: 20px;
+    font-size: 14px;
+    margin: 0px 20px;
+  }  
+.container1{
+  width: 100%;
+  height: 50vh;
+    display: grid;
+    gap: 10px;
+    background-color: #faa700;
+    padding: 10px;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows: minmax(150px auto);
+}
+.grid{
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+.c1{
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+}
+.c2{
+  margin-top: -70px;
+  margin-left: 100vh;
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+}
+.c3{
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+}
+.c4{
+  grid-column: 1 / span 2;
+  grid-row: 4;
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  margin-top: -70px;
+}
+form{
+   background:white;
+   width: 700px;
+   height: 65px;
+   display: flex;
+}
+
+form input{
+    flex: 1;
+    border-color: red;
+    border:2px;
+    outline: none;
+    color: red;
+}
+form button{
+    background: tomato;
+    padding:10px 50px;
+    border: none;
+    outline: none;
+    color: #fff; 
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+form .fa-search{
+    align-self: center;
+    padding: 10px 20px;
+    color: #777;
+}
+.container2{
+    width: 100%;
+    height: 40vh;
+    display: grid;
+    background-color:blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cps{
+  margin-top: -250px;
+}
+.container3{
+    width: 100%;
+    height: 10vh;
+    display: grid;
+    background-color:blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button{
+  margin-left:10px;
+  background-color:#9BC966;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+</style>

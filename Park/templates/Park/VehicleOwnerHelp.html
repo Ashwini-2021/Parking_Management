@@ -1,0 +1,219 @@
+{% load static %}
+<html>
+    <head>
+        <title>HelpPage</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <img src="{% static 'logo1.png' %}" class="logo">
+                <nav>
+                  <ul>
+                    <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+                    <li class="data1"><a href="{% url 'vodesktop' %}"><button>Back</button></a></li>
+                  </ul>
+                </nav>
+            </div>
+          </header>
+        <div class="container">
+            <form action="#"  id="about" method=POST>
+
+              {% csrf_token %} 
+              <label for="uname">User Name</label></br>
+              <input type="text" id="fname" name="username" placeholder="Your name..">
+          
+            </br><label for="lname">Email Id</label></br>
+              <input type="text" id="lname" name="email" placeholder="Your last name..">
+              
+            </br><label for="lname">Subject</label><br/>
+              <input type="text" id="lname" name="subject" placeholder="Subject....">
+              
+            </br><label for="subject">Description</label></br>
+              <textarea id="subject" name="desc" placeholder="Write something.." style="height:200px"></textarea>
+          
+            </br><a href="{% url 'vohelp' %}"><input type="submit" value="Submit"></a>
+            </form>
+          </div>
+          <footer>
+            <div class="social-links">
+              <a href="#" class="fa fa-facebook"> Facebook</a>
+              <a href="#" class="fa fa-twitter"> Twitter</a>
+              <a href="#" class="fa fa-instagram"> Instagram</a>
+            </div>
+          </footer>
+            
+    </body>
+</html>
+<!--CSS Code-->
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  .title{
+    font-size: 60px;
+      font-weight: 100;
+      margin-top: 24px; ;
+      margin-bottom: 15px;
+      text-align: center;
+      color: white;
+  } 
+  
+  .container{
+      height: 100vh;
+      width: 100%;
+      background: white;
+      background-position: center;
+      background-size: 100% 100%;
+      padding-left: 5%;
+      padding-right: 5%;
+      box-sizing: border-box;
+      position: relative;
+      overflow-x:hidden; 
+       overflow-y:auto; 
+  }
+  header {
+    height: 150px;
+    margin-top: 2px; ;
+    margin-bottom: 5px;
+    background: #9BC966;
+  }
+  .navbar img{
+    margin-top: 40px;
+    padding-left: 5px;
+    height: 150px;
+    width: 130px;
+  }
+  .name{
+    margin-left: -20px;
+    font-size: 60px;
+    font-weight: 100;
+    margin-top: 60px; 
+    text-align: center;
+    color: white;
+  }  
+  body{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  }
+  .navbar{
+    width: 100%;
+    height: 15vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo{
+    width: 160px;
+    cursor:pointer;
+  }
+  
+  nav{
+    flex:1 ;
+    padding-left:60px ;
+  }
+  nav ul li{
+    display: inline;
+    list-style: none;
+    margin: 0px 20px;
+  }
+  nav ul li a{
+    text-decoration: none;
+    color: black;
+  }
+  
+  footer {
+    display: block;
+    text-align: center;
+    padding: 3px;
+    background: #9BC966;
+    color: black;
+    margin-top: 5px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  } 
+  .social-links{
+  font-size: 20px;
+  }
+  footer a{
+    text-decoration: none;
+    color: black;
+    padding-right: 20px;
+    font-size: 14px;
+    margin: 0px 20px;
+  } 
+
+input[type=text], textarea {
+  width: 100vh;
+  padding: 12px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  padding: 12px 20px;
+  border: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: darkblue;
+}
+
+#about {
+    left: 50%;
+    top: 25rem;
+    margin-left: -25%;
+    position: absolute;
+    margin-top: -25%;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    border-radius: 5px; 
+}
+button{
+    margin-left: 100vh;
+    border: none;
+    background-color: antiquewhite;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+
+<!--javascript code-->
+<script>
+/* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+</script>

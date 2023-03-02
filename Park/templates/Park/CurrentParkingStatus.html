@@ -1,0 +1,158 @@
+{% load static %}
+<html>
+    <head>
+        <title>CurrentParkingStatus</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+      <header>
+        <div class="navbar">
+            <img src="{% static 'logo1.png' %}" class="logo">
+            <nav>
+              <ul>
+                <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+                <li class="data1"><a href="{% url 'homepage' %}"><button>Back</button></a></li>
+              </ul>
+            </nav>
+        </div>
+      </header>
+        <h1>Current Parking Status</h1>
+        <div class="container">
+        <table>
+            <tr>
+              <th>Name Of Vehical Owner</th>
+              <td>{{ request.session.res.VOusername }}</td>
+            </tr>
+            <tr>
+              <th>Address of vehical to park</th>
+              <td>{{ request.session.k.0 }}</td>
+            </tr>
+            <tr>
+              <th>type of vehical</th>
+              <td>{{ request.session.k.1 }}</td>
+            </tr>
+            <tr>
+              <th>vehical Number</th>
+              <td>{{ request.session.k.2.0 }}</td>
+            </tr>
+            <tr>
+              <th>Charges to pay</th>
+              <td>{{ request.session.k.3 }}</td>
+            </tr>
+          </table>
+        </div>
+        <a href="{% url 'unpark'%}"><button type="submit" value="Unpark The vehical">Unpark The vehical</button></a>        
+        <footer>
+          <div class="social-links">
+            <a href="#" class="fa fa-facebook"> Facebook</a>
+            <a href="#" class="fa fa-twitter"> Twitter</a>
+            <a href="#" class="fa fa-instagram"> Instagram</a>
+          </div>
+        </footer>
+    
+      </body>
+</html>
+<style>
+  body{
+        background-color: white;
+}
+
+header {
+  height: 150px;
+  margin-top: 2px; ;
+  margin-bottom: 5px;
+  background: #9BC966;
+}
+.navbar img{
+  margin-top: 40px;
+  padding-left: 5px;
+  height: 150px;
+  width: 130px;
+}
+.name{
+  margin-left: -20px;
+  font-size: 60px;
+  font-weight: 100;
+  margin-top: 60px; 
+  text-align: center;
+  color: white;
+} 
+.navbar{
+  width: 100%;
+  height: 15vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  width: 160px;
+  cursor:pointer;
+}
+
+nav{
+  flex:1 ;
+  padding-left:60px ;
+}
+nav ul li{
+  display: inline;
+  list-style: none;
+  margin: 0px 20px;
+}
+nav ul li a{
+  text-decoration: none;
+  color: black;
+}
+
+footer {
+  display: block;
+  text-align: center;
+  padding: 3px;
+  background: #9BC966;
+  color: black;
+  margin-top: 5px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+} 
+.social-links{
+font-size: 20px;
+}
+footer a{
+  text-decoration: none;
+  color: black;
+  padding-right: 20px;
+  font-size: 14px;
+  margin: 0px 20px;
+} 
+.container{
+    background-color: grey;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+table {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+th,td {
+  padding: 1rem;
+  border: 1px solid black;
+}
+h1{
+    margin-top: 5%;
+    text-align: center;
+}
+button{
+    margin-top: 20px;
+    margin-left: 45%;
+    background-color: green;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+</style>

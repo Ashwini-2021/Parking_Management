@@ -1,0 +1,277 @@
+{% load static %}
+<html>
+    <head>
+        <title>LandOwnerProfile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <img src="{% static 'logo1.png' %}" class="logo">
+                <nav>
+                  <ul>
+                    <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+                    <li><a href="{% url 'lohelp' %}" class="help">Help</a></li>
+                    <a href="{% url 'lologout' %}">logout</a> 
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        <div>
+            <div class="container">
+                <div class="sidebar">
+                    <img src="{% static 'avatar.png' %}" alt="Avatar" class="avatar">
+                    <h2>{{ request.session.res.LO_username }}</h2>
+                    <h2> Points Earned : {{ pts.0.0 }}</h2>
+                </div>
+                <div class="tab">
+                    <div>
+                        <h1>About</h1>
+                    </div>
+                </div>
+                <div class="tab1">
+                    <div class="head">
+                        <h3>Full Name:</h3>
+                    </div>
+                    <div class="value">
+                      {{ request.session.res.LO_username }}
+                    </div>
+                </div>
+                <div class="tab2">
+                    <div class="head">
+                        <h3>Email&emsp;&emsp;:</h3>
+                    </div>
+                    <div class="value">
+                      {{ request.session.res.LO_Email }}
+                    </div>
+                </div>
+                <div class="tab3">
+                    <div class="head">
+                        <h3>Phone&emsp;&ensp;:</h3>
+                    </div>
+                    <div class="value">
+                      {{ request.session.res.LO_PhoneNo }}
+                    </div>
+                </div>
+                <div class="tab5">
+                    <h1>Parking Place Details</h1>       
+                    <a href="{% url 'addplace' %}"><button type="button" class = "btn btn-primary btn-sm">Add Place</button></a>                                               
+                </div> 
+                <div class="tab6">
+                  <table>
+                    <tr>
+                        <th>Address</th>
+                        <th>Area in sqft</th>
+                        <th>Remove Place</th>
+                    </tr>
+                    {% for x in t %}
+                    <tr>
+                        <td>{{ x.0 }}</td>
+                        <td>{{ x.1 }}</td>
+                        <td><a href="{% url 'deleteplace' x.0 %}" class="btn1 sm danger">remove</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+            </div>       
+        </div>
+    </body>
+</html>
+
+<style>
+    body{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  }
+.avatar {
+      vertical-align: middle;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+}    
+.container{
+  display: grid;
+  grid-template-columns:1fr 3fr;
+  grid-template-rows: minmax(150px auto);
+  grid-gap: 5px;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:#FAE5D3;
+}
+.sidebar{
+  grid-row-start:1;
+  grid-row-end:8;
+  grid-column-start:1;
+  grid-column-end:2;
+  background-color: #F9E79F;
+  color: black;
+  height: 100%;
+}
+.sidebar img{
+  margin-top: 50px;
+  margin-left: 17vh;
+}
+.sidebar h2{
+  text-align: center;
+}
+.tab{
+  grid-row-start:1;
+  grid-row-end:2;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color: #949392;
+  color: white;
+  height: 100%;
+}
+.tab h1{
+  text-align: center;
+}
+.tab1{
+  grid-row-start:2;
+  grid-row-end:3;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color: #F9E79F;
+  color: black;
+  height: 100%;
+  display: flex;
+}
+.tab2{
+  grid-row-start:3;
+  grid-row-end:4;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color:#F9E79F;
+  color: black;
+  height: 100%;
+  display: flex;
+}
+.tab3{
+  grid-row-start:4;
+  grid-row-end:5;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color: #F9E79F;
+  color: black;
+  height: 100%;
+  display: flex;
+}
+.tab5{
+  display: flex;
+  grid-row-start:6;
+  grid-row-end:7;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color:#949392;
+  color: white;
+  height: 100%;
+}
+.tab5 h1{
+  margin-left: 50vh; 
+}
+button{
+  margin-top: 3vh;
+  margin-left: 30vh;
+  border: none;
+  color: white;
+  background-color:  #9BC966;
+  height: 30px;
+  width: 100px;
+}
+.tab6{
+  grid-row-start:7;
+  grid-row-end:8;
+  grid-column-start:2;
+  grid-column-end:3;
+  background-color:#F9E79F;
+  color: black;
+  height: 100%;
+}
+table{
+  width: 100vh;
+  text-align: center;
+  margin-left: 25vh;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+th,td{
+  padding: 1.5vh;
+}
+h3{
+  margin-left: 40px;
+  margin-right: 20px;
+}
+.value{
+  
+  margin-left:30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+header {
+  height: 150px;
+  margin-top: 2px; ;
+  margin-bottom: 5px;
+  background: #9BC966;
+}
+.navbar{
+  width: 100%;
+  height: 15vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.navbar img{
+  margin-top: 40px;
+  padding-left: 5px;
+  height: 150px;
+  width: 130px;
+}
+.name{
+  margin-left: -60px;
+  margin-right: 110vh;
+  font-size: 60px;
+  font-weight: 100;
+  margin-top: 50px; 
+  text-align: center;
+  color:black;
+}
+nav{
+  flex:1 ;
+  padding-left:60px ;
+}
+nav ul li{
+  display: inline;
+  list-style: none;
+}
+nav ul li a{
+  font-size:60px;
+  text-decoration: none;
+  color: black;
+}
+.logo{
+  width: 160px;
+  cursor:pointer;
+}  
+.fa{
+  color: black;
+ 
+  margin-right: 20px;
+}
+.help{
+  color: black;
+  font-size: 20px;
+  margin-left: -10vh;
+  margin-right: 50px;
+}
+.btn1{
+  display: inline-block;
+  width: fit-content;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  background-color:red;
+  cursor: pointer;
+  transition: all 300ms ease;
+  color: #f2f2fe;
+}
+</style>

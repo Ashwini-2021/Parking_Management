@@ -1,0 +1,690 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>LandOwnerLogin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+        <img src="{% static 'logo1.png' %}" class="logo">
+        <nav>
+          <ul>
+            <li class="name"><a href="{% url 'homepage' %}">Park_Mentor</a></li>
+            <li class="data1"><a href="{% url 'homepage' %}">Home</a></li>
+            <li class="data2"><a href="{% url 'hpcontactus' %}">Contact Us</a></li>
+         
+        <li>
+          <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">Sign In/Sign Up </button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="{% url 'lologin' %}">Land Owner</a>
+                <a href="{% url 'vologin' %}">Vehicle Owner</a>
+                <a href="{% url 'adminlogin' %}">Admin</a>
+              </div> 
+          </div> 
+        </li> 
+      </ul>
+    </nav>
+    </div>
+  </header>
+
+  <main>
+    <center>
+      
+    <div class="wrapper">
+      {% if k.0 == 1 %}
+        <label class="errlabel"> Invalid Email or password </label>
+      {% endif %}
+      <label class="title">Land Owner</label>
+      <div class="title-text">
+         <div class="title login">
+            Login 
+         </div>
+         <div class="title signup">
+            Register 
+         </div>
+      </div>
+      <div class="form-container">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{message}}
+          </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+         <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+         </div>
+         <div class="form-inner">
+
+          <!--Login form-->
+            <form action="#" class="login" method=POST>
+              {% csrf_token %}
+               <div class="field">
+                  <input type="email" placeholder="Email Address" name='email1' required>
+               </div>
+               <div class="field">
+                  <input type="password" placeholder="Password" name='password3' required>
+               </div>
+               <div class="field btn">
+                  <div class="btn-layer"></div>
+                  <input type="submit" value="Login" name='submit'>
+               </div>
+               <div class="signup-link">
+                  Not a member? <a href="">Signup now</a>
+               </div>
+            </form>
+
+            <!--Sign up or registration form-->
+            <form action="#" class="signup" method=POST onsubmit="return validateData()">
+              {% csrf_token %}
+                <div class="field">
+                   <input type="text" placeholder="Name" name='username' id="uname"
+                     oninput="isValidData('uname','uname_error')"
+                     onfocusout="isEmptyField('uname','uname_error')">
+                     <small class="mandatory" id="uname_error"></small>
+                </div>
+                <div class="field">
+                   <input type="email" placeholder="Email Id" name='email' id="email"
+                   oninput="validateMailID('email','mail_error')"
+                   onfocusout="isEmptyField('email','mail_error')">
+                   <small class="mandatory" id="mail_error"></small>
+                </div>
+                <div class="field">
+                   <input type="text" placeholder="Phone Number" name='phoneno' id="pno"
+                   oninput="validatePhoneNo('pno','pno_error')"
+                   onfocusout="isEmptyField('pno','pno_error')">
+                   <small class="mandatory" id="pno_error"></small>
+                </div>
+                <div class="field">
+                   <input type="password" placeholder="Password" name='pass1' id='pass1'
+                    oninput="isStrongPass()" onfocusout="isEmptyField('pass1','pass1_error')">
+                    <small class="mandatory" id="pass1_error"></small>
+                </div>
+                <div class="field">
+                   <input type="password" placeholder="Confirm password" name='pass2' id='pass2'
+                    oninput="confirmedPass()" onfocusout="isEmptyField('pass2','pass2_error')">
+                   <small class="mandatory" id="pass2_error"></small>
+                </div>
+                <div class="field btn">
+                   <div class="btn-layer"></div>
+                   <input type="submit" value="SignUp" name='submit'>
+                </div>
+             </form>
+         </div>
+      </div>
+   </div>
+</center>
+  </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="#" class="fa fa-facebook"> Facebook</a>
+        <a href="#" class="fa fa-twitter"> Twitter</a>
+        <a href="#" class="fa fa-instagram"> Instagram</a>
+      </div>
+    </footer>
+
+    <script>
+      const loginText = document.querySelector(".title-text .login");
+      const loginForm = document.querySelector("form.login");
+      const loginBtn = document.querySelector("label.login");
+      const signupBtn = document.querySelector("label.signup");
+      const signupLink = document.querySelector("form .signup-link a");
+      signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+      });
+      loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+      });
+      signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+      });
+   </script> 
+</body>
+</html>
+
+<style>
+   *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.title{
+  font-size: 60px;
+    font-weight: 100;
+    margin-top: 24px; ;
+    margin-bottom: 15px;
+    text-align: center;
+    color: black;
+} 
+
+.container{
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg,#87adfe,#ff77);
+    background-position: center;
+    background-size: 100% 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x:hidden; 
+     overflow-y:auto; 
+}
+header {
+  height: 150px;
+  margin-top: 2px; ;
+  margin-bottom: 5px;
+  background: #9BC966;
+}
+.navbar img{
+  margin-top: 35px;
+  padding-left: 2px;
+  height: 150;
+  width: 120;
+}
+.data1{
+  margin-left: 500px;
+  font-size: 20px;
+}
+.data2{
+  font-size: 20px;
+}
+.name{
+  font-size: 60px;
+  font-weight: 100;
+  margin-top: 70px; 
+  color: brown;
+  margin-left:-20px;
+}    
+body{
+background-color:white;
+height: auto;
+width: 100%;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background:transparent;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background: transparent;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+.gradient-text1{
+  background-image: linear-gradient(60deg, blue, purple);
+      -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.navbar{
+  width: 100%;
+  height: 15vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  height:150px;
+  width: 120px;
+  cursor:pointer;
+}
+
+nav{
+  flex:1 ;
+  padding-left:60px ;
+}
+nav ul li{
+  display: inline;
+  list-style: none;
+  margin: 0px 20px;
+}
+nav ul li a{
+  text-decoration: none;
+  color: black;
+}
+.gradient-text{
+  background-image: linear-gradient(45deg,#662D8C , #ED1E79 );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+footer {
+  display: block;
+  text-align: center;
+  padding: 3px;
+  background: #9BC966;
+  color: black;
+  margin-top: 5px; ;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+} 
+.social-links{
+font-size: 20px;
+}
+footer a{
+  text-decoration: none;
+  color: black;
+  padding-right: 20px;
+  font-size: 14px;
+  margin: 0px 20px;
+}  
+
+::selection{
+  background: #fa4299;
+  color: #fff;
+}
+.wrapper{
+  overflow: hidden;
+  max-width: 390px;
+  background: #A9CCE3;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+  align-content: center;
+}
+.wrapper .title-text{
+  display: flex;
+  width: 200%;
+}
+.wrapper .title{
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.wrapper .slide-controls{
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.slide-controls .slide{
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
+.slide-controls label.signup{
+  color: #000;
+}
+.slide-controls .slider-tab{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: #9BC966;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+input[type="radio"]{
+  display: none;
+}
+#signup:checked ~ .slider-tab{
+  left: 50%;
+}
+#signup:checked ~ label.signup{
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+#signup:checked ~ label.login{
+  color: #000;
+}
+#login:checked ~ label.signup{
+  color: #000;
+}
+#login:checked ~ label.login{
+  cursor: default;
+  user-select: none;
+}
+.wrapper .form-container{
+  width: 100%;
+  overflow: hidden;
+}
+.form-container .form-inner{
+  display: flex;
+  width: 200%;
+}
+.form-container .form-inner form{
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.form-inner form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+.form-inner form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+.form-inner form .field input:focus{
+  border-color: #fc83bb;
+  /* box-shadow: inset 0 0 3px #fb6aae; */
+}
+.form-inner form .field input::placeholder{
+  color: #999;
+  transition: all 0.3s ease;
+}
+form .field input:focus::placeholder{
+  color: #b3b3b3;
+}
+.form-inner form .pass-link{
+  margin-top: 5px;
+}
+.form-inner form .signup-link{
+  text-align: center;
+  margin-top: 30px;
+}
+.form-inner form .pass-link a,
+.form-inner form .signup-link a{
+  color: #fa4299;
+  text-decoration: none;
+}
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover{
+  text-decoration: underline;
+}
+form .btn{
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+form .btn .btn-layer{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: #9BC966;
+    border-radius: 5px;
+  transition: all 0.4s ease;;
+}
+form .btn:hover .btn-layer{
+  left: 0;
+}
+form .btn input[type="submit"]{
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+</style>
+
+<script>
+   /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</script>
+<script>
+
+  function setError(id, error, id2) {
+      document.getElementById(id).innerHTML = error;
+      document.getElementById(id).style.color = "red";
+      document.getElementById(id2).style.borderColor = "red";
+  }
+  
+  function setCorrect(id1, id2) {
+      document.getElementById(id1).innerHTML = "";
+      document.getElementById(id2).style.borderColor = "blue";
+  }
+  
+  // Validation for username
+  function isValidData(inputID, errorID) {
+    let flag = isEmptyField(inputID, errorID);
+    if (flag == false) {
+        return false;
+    }
+    var regName =  /^[a-zA-Z ]*$/;;
+    let lname = document.getElementById(inputID).value
+    if (!regName.test(lname)) 
+    {
+      console.log("Invalid Data of", inputID);
+      setError(errorID, "Please enter the valid data", inputID);
+      return false;
+    }
+    else if (lname.length < 2) 
+    {
+      console.log("Short lname");
+      setError(errorID, "Length of data should be at least 2", inputID);
+      return false;
+    }
+    else 
+    {
+      console.log("Correct lname");
+      setCorrect(errorID, inputID);
+      return true;
+    }
+  }
+  
+  function validatePhoneNo()
+  {
+    let flag=isEmptyField("pno","pno_error")
+    if(flag==false)
+    {
+      return false;
+    }
+  
+    var regpno=/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    let pn=document.getElementById("pno").value
+    if(!regpno.test(pn))
+    {
+        console.log("Invalid phone number");
+        setError("pno_error", "Please Enter The Strong Password", "pno");
+        return false;
+    }
+    else {
+      setCorrect("pno_error", "pno");
+      console.log("Valid phone number")
+      return true;
+    }
+  }
+  
+  // Strong Password Check
+  
+  function isStrongPass() {
+    let flag = isEmptyField("pass1", "pass1_error");
+    if (flag == false) {
+        return false;
+    }
+  
+    console.log("I got call")
+    var regPass = /?=.{8,}/;
+    let pass = document.getElementById("pass1").value
+  
+    if (!regPass.test(pass)) {
+        console.log("Invalid pass");
+        setError("pass1_error", "Please Enter The Strong Password", "pass1");
+        return false;
+  
+    } else {
+        setCorrect("pass1_error", "pass1");
+        console.log("Valid pass")
+        return true;
+    }
+  }
+  
+  // To confirmed the password 
+  function confirmedPass() {
+    let flag = isEmptyField("pass2", "pass2_error");
+    if (flag == false) 
+    {
+      return false;
+    }
+    console.log("I got call with wrong pass")
+  
+    let pass1 = document.getElementById("pass1").value
+    let pass2 = document.getElementById("pass2").value
+  
+    if (pass1 != pass2 || pass2 == "") {
+        setError("pass2_error", "Password Not Matched ", "pass2");
+        return false;
+    }
+    else {
+        setCorrect("pass2_error", "pass2");
+        return true;
+    }
+  }
+  
+   // To Validate MAil ID
+   function validateMailID() {
+  
+    let flag = isEmptyField("email", "mail_error");
+    if (flag == false) {
+        return false;
+    }
+  
+    console.log("mail id");
+    var regName = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
+    var name = document.getElementById('email').value;
+  
+    if (regName.test(name)) {
+        setCorrect("mail_error", "email");
+        return true;
+  
+    } else {
+        console.log("inValid mail")
+        setError("mail_error", "Please Enter Valid Mail ID", "email");
+        return false;
+    }
+  }
+  
+  // To check whether input filed is empty or not
+  function isEmptyField(inputID, errorID) {
+    let data = document.getElementById(inputID).value
+  
+    if (data.length == 0) {
+        console.log("Invalid Data of", inputID);
+        setError(errorID, "Please Fill The Field", inputID);
+        return false;
+    }
+  
+    else {
+        console.log("Correct data");
+        setCorrect(errorID, inputID);
+        return true;
+    }
+  }
+  
+   // This function get call at the time of form submission & check whether data is correctly fill
+   function validateData() {
+  
+    let flag1 = isValidData('uname', 'uname_error');
+    let flag2 = validateMailID();
+    let flag3 = validatePhoneNo();
+    let flag4 = isStrongPass();
+    let flag5 = confirmedPass();
+    
+    if (flag1 && flag2 && flag3 && flag4 && flag5)
+    {
+      return true;
+    }
+    else {
+        return false;
+    }
+  }  
+  </script>  
